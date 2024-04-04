@@ -1,0 +1,184 @@
+<%- include('layout/header.ejs') %>
+
+<section class="section-one">
+    <div class="section-one-title" style="font-weight: bold; font-size: 20px; text-transform: uppercase;">History Panel
+    </div>
+    <div class="underline"></div>
+</section>
+
+<style>
+    .table-container {
+        /* padding: 10px; */
+        border-radius: 3px;
+        box-shadow: 1px 1px 10px #dcdcdc;
+        margin: 0 3%;
+        overflow-x: auto;
+        /* Change from scroll to auto */
+        /* scroll-snap-type: x mandatory; */
+    }
+
+    .table-container::-webkit-scrollbar {
+        width: 10px;
+        height: 4px;
+        background-color: transparent;
+    }
+
+    .table-container::-webkit-scrollbar-button {
+        background-color: transparent;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border: none;
+        text-transform: capitalize;
+    }
+
+    label {
+        font-size: 12px;
+    }
+
+    input {
+        border: none;
+        outline: none;
+        margin: 3px;
+    }
+
+    thead,
+    th {
+        background-color: #12c882;
+        padding: 10px;
+        color: white;
+        border: none;
+        font-size: 12px;
+    }
+
+    table.dataTable thead th,
+    table.dataTable thead td {
+        border: none;
+    }
+
+    .dataTables_info,
+    .paginate_button {
+        font-size: 13px;
+    }
+
+    td,
+    table.dataTable tbody th,
+    table.dataTable tbody td {
+        text-align: center;
+        border: 1px solid #e9e7e7;
+        padding: 20px 15px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+
+    tr:nth-child(even) {
+        background: #e9e7e7 !important;
+    }
+
+    /* Style PDF button */
+    .buttons-pdf {
+        background-color: #007bff !important;
+        color: #fff !important;
+        border: none;
+        padding: 2px 16px !important;
+        margin-right: 8px;
+        margin-top: 5px;
+    }
+
+    /* Style Excel button */
+    .buttons-excel {
+        background-color: #28a745 !important;
+        color: #fff !important;
+        border: none;
+        padding: 2px 16px !important;
+        margin-right: 8px;
+    }
+
+    /* Style Print button */
+    .buttons-print {
+        background-color: #dc3545 !important;
+        color: #fff !important;
+        border: none;
+        padding: 2px 16px !important;
+    }
+
+    .paginate_button:nth-child(0) {
+        background: dodgerblue !important;
+        color: white !important;
+        padding: 4px !important;
+        margin: 10px 0;
+    }
+
+    input {
+        border: 1px solid #28a745;
+        outline: none !important;
+    }
+    .debit {
+    background: #f1110969; 
+    color: #ec0a0a;
+    padding: 5px 23px;
+    /* font-size: 10px; */
+    /* text-transform: capitalize; */
+    border-radius: 3px;
+}
+
+.credit {
+    background: #0ae9815b; 
+    color: green;
+    padding: 5px 17px;
+    /* text-transform: capitalize; */
+    border-radius: 3px;
+}
+</style>
+
+<div class="container">
+    <div class="table-container">
+        <table id="example">
+            <thead>
+                <th>#</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Amount</th>
+                <th>Category</th>
+                <th>Service</th>
+            </thead>
+
+            <tbody>
+                <% 
+                    let i = 1;
+                    var status;
+                    historys.forEach(history => { 
+                    let date = new Date(history.date_created)
+                    let options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+                    let formattedDate = date.toLocaleDateString('en-US', options);
+                    let formattedAmount = parseFloat(history.amount).toLocaleString('en-US');
+                    if (history.source === "income") {
+                        status = "credit";
+                    }else if (history.source === "expenses") {
+                         status = "debit";                        
+                    }
+                    %>
+                <tr>
+                    <td><%= i++ %></td>
+                    <td><%= formattedDate %></td>
+                        <% if (status === "credit") {%>
+                    <td><span class="credit"><%= status %></span></td>
+                        <% }else if (status === "debit") {%>
+                    <td><span class="debit"><%= status %></span></td>
+                        <% }%>
+                    <td>₦<%= formattedAmount %></td>
+                    <td><%= history.category %></td>
+                    <td><%= history.service %> Service</td>
+                </tr>
+                <% }) %>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br><br><br><br><br><br>
+
+<%- include('layout/footer.ejs') %>

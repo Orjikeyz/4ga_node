@@ -1,0 +1,42 @@
+<%- include('layout/header.ejs') %>
+
+<section class="section-one">
+    <div class="section-one-title" style="font-weight: bold; font-size: 20px; text-transform: uppercase;">Add Expenses History</div>
+    <div class="underline"></div>
+</section>
+
+<div class="container">
+    <form action="/expenses_data" method="post">
+        <label for="">Expenses Category</label>
+        <select name="expenses_category" id="" required>
+            <option value="">Select Category</option>
+            <option value="fuel">Fuel</option>
+            <option value="light_bill">Light Bill</option>
+            <option value="program_expenses">Program Expenses</option>
+            <option value="outreach">Mission And Outreach</option>
+            <option value="maintenance">Maintenance and Repairs</option>
+            <option value="others">Others</option>
+        </select>
+
+        <label for="">Amount</label>
+        <input type="text" name="amount" placeholder="0" pattern="[0-9.]*" required>
+
+        <label for="">Service Day</label>
+        <select name="service_day" id="" required>
+            <option value="">Select Service</option>
+            <option value="sunday">Sunday Service</option>
+            <option value="monday">Monday Service</option>
+            <option value="tuesday">Tuesday Service</option>
+            <option value="wednesday">Wednesday Service</option>
+            <option value="thursday">Thursday Service</option>
+            <option value="friday">Friday Service</option>
+            <option value="saturday">Saturday Service</option>
+        </select>
+
+        <button>Submit</button>
+    </form>
+</div>
+
+<br><br><br><br><br><br>
+
+<%- include('layout/footer.ejs') %>

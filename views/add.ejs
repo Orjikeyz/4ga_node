@@ -1,0 +1,43 @@
+<%- include('layout/header.ejs') %>
+
+<section class="section-one">
+    <div class="section-one-title" style="font-weight: bold; font-size: 20px; text-transform: uppercase;">Add Offering
+        History</div>
+    <div class="underline"></div>
+</section>
+
+<div class="container">
+    <form action="/insert_data" method="post">
+        <label for="">Offering Category</label>
+        <select name="offering_category" id="" required>
+            <option value="">Select Category</option>
+            <option value="children">Children Offering</option>
+            <option value="seed_faith">Seed Faith Offering</option>
+            <option value="tithe">Tithe</option>
+            <option value="baby_dedication">Baby Dedication Offering</option>
+            <option value="support">Church Support Offering</option>
+            <option value="others">Other Offerings</option>
+        </select>
+
+        <label for="">Amount</label>
+        <input type="text" name="amount" placeholder="0" pattern="[0-9.]*" required>
+
+        <label for="">Service Day</label>
+        <select name="service_day" id="" required>
+            <option value="">Select Service</option>
+            <option value="sunday">Sunday Service</option>
+            <option value="monday">Monday Service</option>
+            <option value="tuesday">Tuesday Service</option>
+            <option value="wednesday">Wednesday Service</option>
+            <option value="thursday">Thursday Service</option>
+            <option value="friday">Friday Service</option>
+            <option value="saturday">Saturday Service</option>
+        </select>
+
+        <button>Submit</button>
+    </form>
+</div>
+
+<br><br><br><br><br><br>
+
+<%- include('layout/footer.ejs') %>

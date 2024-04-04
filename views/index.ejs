@@ -1,0 +1,53 @@
+<%- include('layout/header.ejs') %>
+
+<section class="section-one">
+    <div class="section-one-title" style="font-weight: bold; font-size: 20px; text-transform: uppercase;">Offering
+        History</div>
+    <div class="underline"></div>
+    <div class="section-one-container">
+        
+            <% if (currentHistorys.length === 0) { %>
+                <p style="text-align: center; margin-top: 15px;">No Data Available</p>
+            <% }else { %>
+                        <% currentHistorys.forEach(currentHistory => { %>
+
+                <article>
+                    <ul>
+                        <li>
+                            <% 
+                                const dateObject = new Date(currentHistory.date_created);
+        
+                                // Extracting time components
+                                const hours = dateObject.getHours();
+                                const minutes = dateObject.getMinutes();
+                                const seconds = dateObject.getSeconds();
+        
+                                // Formatting the time
+                                const formattedTime = `${hours}:${minutes}:${seconds}`;
+                                const number = currentHistory.amount;
+                                const formatter = new Intl.NumberFormat('en-US', {
+                                style: 'decimal',
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                                });
+        
+                                const amount = formatter.format(number);
+        
+                                %>
+                            <p style="text-transform: capitalize;"><%= currentHistory.category  %> Offering</p>
+                            <p style="font-size: 11px; padding: 5px 0;">
+                                <%= `${currentHistory.day}-${currentHistory.month}-${currentHistory.year} ${formattedTime}` %></p>
+                        </li>
+                        <li>
+                            <p><b>₦<%= amount %></b></p>
+                        </li>
+                    </ul>
+                </article>
+             <% }) %>
+        <% } %>
+
+    </div>
+</section>
+<br><br><br><br><br><br>
+
+<%- include('layout/footer.ejs') %>

@@ -1,0 +1,49 @@
+<footer>
+    <ul>
+        <li>
+            <a href="/">
+                <i class="fa-regular fa-house-chimney"></i>
+                <p>Home</p>    
+            </a>
+        </li>
+        <li>
+            <a href="/expenses">
+                <i class="fa-regular fa-circle-minus"></i>
+                <p>Expenses</p>    
+            </a>
+        </li>
+        <li class="footer-center">
+            <a href="/add">
+                <i class="fa-regular fa-plus"></i>
+                <p>Add</p>    
+            </a>
+        </li>
+        <li>
+            <a href="/history">
+                <i class="fa-regular fa-rectangle-vertical-history"></i>
+                <p>History</p>    
+            </a>
+        </li>
+        <li>
+            <a href="/settings">
+                <i class="fa-regular fa-gear"></i>
+                <p>Settings</p>    
+            </a>
+        </li>
+
+    </ul>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'pdf', 'excel', 'print',
+                ]
+            });
+        });
+        
+    </script>
+</footer>
+</body>
+
+</html>
